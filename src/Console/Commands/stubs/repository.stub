@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Repositories;
+use App\Models\{{ modelName }};
+use wdd\structure\Repositories\BaseRepo;
+
+class {{ modelName }}Repo extends BaseRepo
+{
+      // Array with filterable fields
+      protected $filtersKeys = [];
+
+      // Array containing fields that can be searched within
+      protected $searchFileds = [];
+
+      // Array containing relations
+      protected $relations = [];
+
+      // An Array containing fields that exist within searchable relationships
+      protected $realationFileds = [];
+
+    public function __construct({{ modelName }} $model)
+    {
+        parent::__construct($model);
+    }
+}

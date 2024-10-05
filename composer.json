@@ -1,0 +1,17 @@
+{
+    "name": "rateb/structure",
+    "description": "strucure to filter and search",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "rateb\\structure\\": "package/rateb_query_craft/src/"
+        }
+    }
+
+
+}

@@ -1,0 +1,35 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Validation\Rule;
+use wdd\structure\Filters\Filter;
+
+class {{ class }} extends Filter
+{
+    public function __construct(array $filterData)
+    {
+        parent::__construct($filterData);
+    }
+
+    /**
+     * Get the validation rules that apply to the filter request.
+     *
+     * @return array
+     */
+    public static function rules(): array
+    {
+        return [
+            // Add your validation rules here
+        ];
+    }
+
+    /**
+     * Apply filter query on related model.
+     * @param  \Illuminate\Database\Eloquent\Builder &$query
+     */
+    public function apply(&$query)
+    {
+        return $query;
+    }
+}
