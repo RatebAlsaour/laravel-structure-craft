@@ -22,6 +22,12 @@ class MakeFilter extends Command
         // Get the filter name from the command argument
         $filterName = $this->argument('filterName');
 
+        // Check if the filter already exists
+        if ($this->filterExists($filterName)) {
+            $this->error("Filter '{$filterName}' already exists!");
+            return 1;
+        }
+
         // Create the filter
         $this->createFilter($filterName);
         $this->info("Filter '{$filterName}' created successfully!");
@@ -29,9 +35,17 @@ class MakeFilter extends Command
         return 0;
     }
 
+    // Check if the filter already exists
+    protected function filterExists($filterName)
+    {
+        $filterPath = app_path("Filters/{$filterName}.php");
+        return File::exists($filterPath);
+    }
+
     // Create the Filter file
     protected function createFilter($filterName)
     {
+        // Get the stub file content
         $filterStub = File::get($this->stubPath . 'filter.stub');
 
         // Replace placeholders in the filter stub
@@ -43,7 +57,7 @@ class MakeFilter extends Command
         $filterContent = str_replace('{{ namespace }}', $namespace, $filterContent);
 
         // Define the path where the Filter will be created
-        $filterPath = app_path("Filters/{$filterName}.php"); // Remove Filter from the end
+        $filterPath = app_path("Filters/{$filterName}.php");
         $filterDir = dirname($filterPath); // Get the directory of the filter
 
         // Ensure directory exists

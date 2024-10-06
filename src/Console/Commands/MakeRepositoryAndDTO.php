@@ -34,19 +34,16 @@ class MakeRepositoryAndDTO extends Command
         switch ($action) {
             case 'dto':
                 $this->createDTO($modelName);
-                $this->info("DTO created successfully!");
                 break;
 
             case 'repo':
                 $this->createRepository($modelName);
-                $this->info("Repository created successfully!");
                 break;
 
             case 'all':
             default:
                 $this->createDTO($modelName);
                 $this->createRepository($modelName);
-                $this->info('Repository and DTO created successfully!');
                 break;
         }
 
@@ -64,6 +61,12 @@ class MakeRepositoryAndDTO extends Command
 
         // Define the path where the DTO will be created
         $dtoPath = app_path("Http/DTOs/{$modelName}Data.php");
+
+        // Check if the file already exists
+        if (File::exists($dtoPath)) {
+            $this->warn("DTO file already exists at: {$dtoPath}, skipping creation.");
+            return;
+        }
 
         // Ensure directory exists
         File::ensureDirectoryExists(app_path('Http/DTOs'));
@@ -86,6 +89,12 @@ class MakeRepositoryAndDTO extends Command
 
         // Define the path where the Repository will be created
         $repoPath = app_path("Http/Repositories/{$modelName}Repo.php");
+
+        // Check if the file already exists
+        if (File::exists($repoPath)) {
+            $this->warn("Repository file already exists at: {$repoPath}, skipping creation.");
+            return;
+        }
 
         // Ensure directory exists
         File::ensureDirectoryExists(app_path('Http/Repositories'));
