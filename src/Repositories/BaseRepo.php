@@ -1,11 +1,11 @@
 <?php
 
-namespace rateb\structure\Repositories;
+namespace RatebSa\Structure\Repositories;
 
 
 
 
-use rateb\structure\Traits\RepoTrait;
+use RatebSa\Structure\Traits\RepoTrait;
 
 class BaseRepo
 {

@@ -1,35 +1,19 @@
 <?php
 
-namespace {{ namespace }};
+namespace App\Http\DTOs;
 
-use Illuminate\Validation\Rule;
-use wdd\structure\Filters\Filter;
+use rateb\structure\DTOs\BaseDTO;
+use Illuminate\Http\Request;
 
-class {{ class }} extends Filter
+class {{ modelName }}Data extends BaseDTO
 {
-    public function __construct(array $filterData)
+    public static function fromRequest(?Request $request, ...$params): static
     {
-        parent::__construct($filterData);
-    }
+        $instance = parent::fromRequest($request, ...$params);
 
-    /**
-     * Get the validation rules that apply to the filter request.
-     *
-     * @return array
-     */
-    public static function rules(): array
-    {
-        return [
-            // Add your validation rules here
-        ];
-    }
+        // Populate the DTO with request data
+        $instance->name = $request->input('name');  // Example
 
-    /**
-     * Apply filter query on related model.
-     * @param  \Illuminate\Database\Eloquent\Builder &$query
-     */
-    public function apply(&$query)
-    {
-        return $query;
+        return $instance;
     }
 }

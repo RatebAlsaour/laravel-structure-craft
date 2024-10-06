@@ -1,7 +1,7 @@
 <?php
 
 
-namespace rateb\structure\Services;
+namespace RatebSa\Structure\Services;
 
 use Illuminate\Support\Facades\App;
 

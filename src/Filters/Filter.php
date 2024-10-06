@@ -1,8 +1,8 @@
 <?php
 
-namespace rateb\structure\Filters;
+namespace RatebSa\Structure\Filters;
 
-use rateb\structure\Services\ApiResponseService;
+use RatebSa\Structure\Services\ApiResponseService;
 
 abstract class Filter
 {

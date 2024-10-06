@@ -1,7 +1,7 @@
 <?php
 
 
-namespace rateb\structure\DTOs;
+namespace RatebSa\Structure\DTOs;
 
 use Illuminate\Http\Request;
 

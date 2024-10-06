@@ -1,9 +1,9 @@
 <?php
 
-namespace rateb\structure\Filters;
+namespace RatebSa\Structure\Filters;
 
 
-use rateb\structure\Filters\Filter as  FiltersFilter;
+use RatebSa\Structure\Filters\Filter as  FiltersFilter;
 
 class FilterFactory
 {

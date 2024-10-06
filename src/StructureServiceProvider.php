@@ -1,12 +1,12 @@
 <?php
 
-namespace rateb\structure;
+namespace RatebSa\Structure;
 
 
 use Illuminate\Support\ServiceProvider;
-use rateb\structure\Console\Commands\MakeDTO;
-use rateb\structure\Console\Commands\MakeFilter;
-use rateb\structure\Console\Commands\MakeRepositoryAndDTO;
+use RatebSa\Structure\Console\Commands\MakeDTO;
+use RatebSa\Structure\Console\Commands\MakeFilter;
+use RatebSa\Structure\Console\Commands\MakeRepositoryAndDTO;
 
 
 class StructureServiceProvider extends ServiceProvider

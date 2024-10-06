@@ -1,6 +1,6 @@
 <?php
 
-namespace rateb\structure\Traits;
+namespace RatebSa\Structure\Traits;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
