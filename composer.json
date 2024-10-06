@@ -15,7 +15,9 @@
     },
     "extra": {
         "laravel": {
-            "providers": "RatebSa\\Structure\\StructureServiceProvider"
+            "providers": [
+                "RatebSa\\Structure\\StructureServiceProvider"
+            ]
         }
     }
 }
