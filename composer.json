@@ -10,7 +10,14 @@
     },
     "autoload": {
         "psr-4": {
-            "RatebSa\\Structure\\": "package/rateb_query_craft/src/"
+            "RatebSa\\Structure\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "RatebSa\\Structure\\StructureServiceProvider"
+            ]
         }
     }
 }
