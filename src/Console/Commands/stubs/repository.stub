@@ -2,6 +2,7 @@
 
 namespace App\Http\Repositories;
 use App\Models\{{ modelName }};
+use App\Http\DTOs\{{ modelName }}Data;
 use RatebSa\Structure\Repositories\BaseRepo;
 
 class {{ modelName }}Repo extends BaseRepo
@@ -20,6 +21,6 @@ class {{ modelName }}Repo extends BaseRepo
 
     public function __construct({{ modelName }} $model)
     {
-        parent::__construct($model);
+        parent::__construct($model , {{ modelName }}Data::class);
     }
 }
