@@ -2,7 +2,7 @@
 
 namespace App\Http\DTOs;
 
-use rateb\structure\DTOs\BaseDTO;
+use RatebSa\Structure\DTOs\BaseDTO;
 use Illuminate\Http\Request;
 
 class {{ modelName }}Data extends BaseDTO

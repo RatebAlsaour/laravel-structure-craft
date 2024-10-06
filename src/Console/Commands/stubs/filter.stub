@@ -3,7 +3,7 @@
 namespace {{ namespace }};
 
 use Illuminate\Validation\Rule;
-use wdd\structure\Filters\Filter;
+use RatebSa\Structure\Filters\Filter;
 
 class {{ class }} extends Filter
 {

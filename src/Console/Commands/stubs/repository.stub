@@ -2,7 +2,7 @@
 
 namespace App\Http\Repositories;
 use App\Models\{{ modelName }};
-use rateb\structure\Repositories\BaseRepo;
+use RatebSa\Structure\Repositories\BaseRepo;
 
 class {{ modelName }}Repo extends BaseRepo
 {
