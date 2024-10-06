@@ -1,13 +1,10 @@
 {
     "name": "rateb/structure",
-    "description": "strucure to filter and search",
+    "description": "Structure package for filtering and searching",
     "type": "library",
     "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "require": {
-        "php": ">=8.1"
-    },
     "autoload": {
         "psr-4": {
             "RatebSa\\Structure\\": "package/rateb_query_craft/src/"
@@ -19,5 +16,8 @@
                 "RatebSa\\Structure\\StructureServiceProvider"
             ]
         }
+    },
+    "require": {
+        "php": ">=8.1"
     }
 }
