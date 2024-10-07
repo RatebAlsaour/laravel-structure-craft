@@ -1,4 +1,4 @@
-# laravel structure Professionally
+# laravel-structure-craft
 
 A brief description of your project, its purpose, and key features.
 
@@ -133,6 +133,9 @@ class UserController extends Controller
 
 
 ```
+
+## Key Concepts Continued
+
 ### UserRepo.php
 The `UserRepo` is responsible for handling all database interactions related to the User model. It extends the `BaseRepo` to benefit from common repository functionalities, such as filtering and searching.
 
@@ -165,8 +168,8 @@ class UserRepo extends BaseRepo
 }
 
 ```
-
-1 . Arrays to determine the filter that was created and will come later how to create it , `status` is ket in array **`$filtersKeys`** 
+### Filterable Fields
+- **Filterable fields (`filtersKeys`)**: Filters such as `StatusFilter` allow users to filter users by their status , Arrays to determine the filter that was created and will come later how to create it
 
 ```php
       // class UserRepo
@@ -176,9 +179,20 @@ class UserRepo extends BaseRepo
       ];
 
 ```
+- And it is passed in the body in api , the methos must be `post`
+  
+```json
+{
+    "filters":{
+        "status":{
+            "status":true
+        }
+    }
+}
 
-
-2 . Arrays to specify search fields , And it is passed in the parameter `search-key`
+```
+### Searchable Fields
+- **Searchable fields (`searchFileds`)**: Allows users to search for users by their email addresses , And it is passed in the parameter `search-key`.
 
 ```php
       // class UserRepo
@@ -187,7 +201,8 @@ class UserRepo extends BaseRepo
 
 ```
 
-  To search within relationships between tables 
+### Relations and Relation Fields
+- **Relations and relation fields**: Define relationships and searchable fields within relationships, like 
 
 ```php
       // class UserRepo
@@ -207,16 +222,12 @@ class UserRepo extends BaseRepo
 ```
 
 
-## Key Concepts Continued
 
-### Filterable Fields
-- **Filterable fields (`filtersKeys`)**: Filters such as `StatusFilter` allow users to filter users by their status.
 
-### Searchable Fields
-- **Searchable fields (`searchFileds`)**: Allows users to search for users by their email addresses.
 
-### Relations and Relation Fields
-- **Relations and relation fields**: Define relationships and searchable fields within relationships, like `profile.first_name`.
+
+
+
 
 ### UserData.php (DTO)
 The `UserData` class is responsible for collecting and validating data from requests before passing it to the repository.
