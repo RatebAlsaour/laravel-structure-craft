@@ -131,8 +131,8 @@ class UserController extends Controller
 }
 
 
-```
 
+```
 ### UserRepo.php
 The `UserRepo` is responsible for handling all database interactions related to the User model. It extends the `BaseRepo` to benefit from common repository functionalities, such as filtering and searching.
 
@@ -165,6 +165,48 @@ class UserRepo extends BaseRepo
 }
 
 ```
+
+1 . Arrays to determine the filter that was created and will come later how to create it , `status` is ket in array **`$filtersKeys`** 
+
+```php
+      // class UserRepo
+      // Array with filterable fields
+      protected $filtersKeys = [
+          'status'=>StatusFilter::class,
+      ];
+
+```
+
+
+2 . Arrays to specify search fields , And it is passed in the parameter `search-key`
+
+```php
+      // class UserRepo
+      // Array containing fields that can be searched within
+      protected $searchFileds = ['field'];
+
+```
+
+  To search within relationships between tables 
+
+```php
+      // class UserRepo
+       // An Array containing fields that exist within searchable relationships
+     protected $realationFileds = [
+     'relation1'=>[
+           'field1' ,
+           'field2'  
+ 
+        ],
+        'relation2'=>[
+           'field3' ,
+           'field4' 
+        ],
+];
+
+```
+
+
 ## Key Concepts Continued
 
 ### Filterable Fields
