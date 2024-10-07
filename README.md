@@ -345,7 +345,7 @@ The name of the repository and DTO should match the name of the model. In this c
 
 
 
-##Contact
+## Contact
 
 Thank You Message
 
