@@ -1,16 +1,11 @@
 # laravel-structure-craft
-
-A brief description of your project, its purpose, and key features.
+## Package for Organizing Code with Design Patterns and SOLID Principles
+This package is designed to help structure your code using the Repository and DTO (Data Transfer Object) patterns. It also implements SOLID principles to maintain clean, maintainable, and scalable business logic, especially for handling search and filter operations.
 
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contact](#contact)
-
-
-## Package for Organizing Code with Design Patterns and SOLID Principles
-
-This package is designed to help structure your code using the Repository and DTO (Data Transfer Object) patterns. It also implements SOLID principles to maintain clean, maintainable, and scalable business logic, especially for handling search and filter operations.
 
 
 ### Installation
