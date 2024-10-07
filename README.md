@@ -339,7 +339,7 @@ php artisan make:repo-dto User --action=dto
 # To create them together ( DTO , Repository )
 
 ```bash
-php artisan make:repo-dto User --action=dto
+php artisan make:repo-dto User --action=all
 //or
 php artisan make:repo-dto User 
 ```
