@@ -288,7 +288,21 @@ class StatusFilter extends Filter
 - **List Users**: 
   Send a POST request to `/index` to retrieve a filtered and searchable list of users.
 
-## Adding New Filters
+## Creating a Filter
+
+To create a filter, you can use the following Artisan command:
+
+```bash
+php artisan make:filter StatusUserFilter
+```
+
+
+This command will generate a new filter class named StatusUserFilter. Filters are used to define the criteria for retrieving or manipulating data, allowing you to encapsulate and organize your query logic effectively.
+
+Make sure to implement the necessary methods within the generated filter class to suit your application's requirements
+
+
+
 To add a new filter to any repository:
 1. **Create a new filter class** (e.g., `AgeFilter`).
 2. **Define the filter logic** in the `apply()` method.
@@ -298,24 +312,29 @@ To add a new filter to any repository:
 To extend the DTO to handle new data fields:
 1. **Modify the `UserData::fromRequest()` method** to include the new fields.
 2. **Ensure these fields are available** in the incoming request.
-## Creating Repository and DTO
+3. 
+## Creating Repository 
 
 To create a Repository and a Data Transfer Object (DTO), you can use the following Artisan command:
 
 ```bash
-php artisan make:repo-dto User
+php artisan make:repo-dto User --action=repo
 ```
 
-
-
-
-
-# Creating Repository and DTO
+# Creating DTO
 
 To create a Repository and a Data Transfer Object (DTO), you can use the following Artisan command:
 
 ```bash
-php artisan make:repo-dto User
+php artisan make:repo-dto User --action=dto
+```
+
+# To create them together ( DTO , Repository )
+
+```bash
+php artisan make:repo-dto User --action=dto
+//or
+php artisan make:repo-dto User 
 ```
 
 ## Important Note
@@ -323,27 +342,10 @@ php artisan make:repo-dto User
 The name of the repository and DTO should match the name of the model. In this case, **User** refers to the **User** model. This consistency helps maintain organization within your codebase, making it easier to manage and understand the relationships between models, repositories, and DTOs.
 
 
-## Creating a Filter
-
-To create a filter, you can use the following Artisan command:
-
-```bash
-php artisan make:filter StatusUserFilter
-```
-
-This command will generate a new filter class named StatusUserFilter. Filters are used to define the criteria for retrieving or manipulating data, allowing you to encapsulate and organize your query logic effectively.
-
-Make sure to implement the necessary methods within the generated filter class to suit your application's requirements
 
 
 
-
-
-
-
-
-
-
+##Contact
 
 Thank You Message
 
@@ -353,7 +355,7 @@ I would like to extend my heartfelt thanks to you for using our package. We trul
 
 If you have any questions or feedback, please feel free to reach out to us via email:
 
-Email: [your_email@example.com]
+Email: [rateb.alsaour98@gmail.com]
 
 We are here to assist you and look forward to hearing your thoughts!
 
