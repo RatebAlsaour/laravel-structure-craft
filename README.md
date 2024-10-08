@@ -319,7 +319,7 @@ To add a new filter to any repository:
 To extend the DTO to handle new data fields:
 1. **Modify the `UserData::fromRequest()` method** to include the new fields.
 2. **Ensure these fields are available** in the incoming request.
-3. 
+
 ## Creating Repository 
 
 To create a Repository and a Data Transfer Object (DTO), you can use the following Artisan command:
