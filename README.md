@@ -130,10 +130,25 @@ class UserController extends Controller
 
 ```
 
-## Key Concepts Continued
+## Usage
+
+
+
+
 
 ### UserRepo.php
 The `UserRepo` is responsible for handling all database interactions related to the User model. It extends the `BaseRepo` to benefit from common repository functionalities, such as filtering and searching.
+
+
+## Creating Repository 
+
+To create a Repository and a Data Transfer Object (DTO), you can use the following Artisan command:
+
+```bash
+php artisan make:repo-dto User --action=repo
+```
+
+
 
 ```php
 namespace App\Http\Repositories;
@@ -166,13 +181,7 @@ class UserRepo extends BaseRepo
 ```
 
 
-## Creating Repository 
 
-To create a Repository and a Data Transfer Object (DTO), you can use the following Artisan command:
-
-```bash
-php artisan make:repo-dto User --action=repo
-```
 
 
 ### Filterable Fields
@@ -230,12 +239,6 @@ php artisan make:repo-dto User --action=repo
 
 
 
-
-
-
-
-
-
 ### UserData.php (DTO)
 The `UserData` class is responsible for collecting and validating data from requests before passing it to the repository.
 
@@ -290,10 +293,18 @@ php artisan make:repo-dto User
 
 The name of the repository and DTO should match the name of the model. In this case, **User** refers to the **User** model. This consistency helps maintain organization within your codebase, making it easier to manage and understand the relationships between models, repositories, and DTOs.
 
+### StatusUserFilter.php (DTO)
+
+## Creating a Filter
+
+To create a filter, you can use the following Artisan command:
+
+```bash
+php artisan make:filter User/StatusUserFilter
+```
 
 
-
-### StatusFilter.php
+### StatusUserFilter.php
 The `StatusFilter` class filters users by their status. This is an example of how filters are applied in the repository to ensure clean, reusable, and flexible querying.
 
 ```php
@@ -301,7 +312,7 @@ namespace App\Filters\User;
 
 use RatebSa\Structure\Filters\Filter;
 
-class StatusFilter extends Filter
+class StatusUserFilter extends Filter
 {
     public static function rules(): array
     {
@@ -323,7 +334,7 @@ class StatusFilter extends Filter
 
 
 
-## Usage
+
 
 - **Create a User**: 
   Send a POST request to `/create` with user data (e.g., name, email, password, status).
@@ -331,13 +342,6 @@ class StatusFilter extends Filter
 - **List Users**: 
   Send a POST request to `/index` to retrieve a filtered and searchable list of users.
 
-## Creating a Filter
-
-To create a filter, you can use the following Artisan command:
-
-```bash
-php artisan make:filter StatusUserFilter
-```
 
 
 This command will generate a new filter class named StatusUserFilter. Filters are used to define the criteria for retrieving or manipulating data, allowing you to encapsulate and organize your query logic effectively.
