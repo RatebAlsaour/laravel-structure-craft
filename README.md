@@ -164,6 +164,17 @@ class UserRepo extends BaseRepo
 }
 
 ```
+
+
+## Creating Repository 
+
+To create a Repository and a Data Transfer Object (DTO), you can use the following Artisan command:
+
+```bash
+php artisan make:repo-dto User --action=repo
+```
+
+
 ### Filterable Fields
 - **Filterable fields (`filtersKeys`)**: Filters such as `StatusFilter` allow users to filter users by their status , Arrays to determine the filter that was created and will come later how to create it
 
@@ -230,6 +241,15 @@ The `UserData` class is responsible for collecting and validating data from requ
 
 
 
+# Creating DTO
+
+To create a Repository and a Data Transfer Object (DTO), you can use the following Artisan command:
+
+```bash
+php artisan make:repo-dto User --action=dto
+```
+
+
 
 ```php
 namespace App\Http\DTOs;
@@ -256,6 +276,22 @@ class UserData extends BaseDTO
 
 ### `fromRequest()`
 - **`fromRequest()`**: Gathers data from the incoming request (e.g., name, email, password, status) and creates an instance of `UserData`.
+
+
+# To create them together ( DTO , Repository )
+
+```bash
+php artisan make:repo-dto User --action=all
+//or
+php artisan make:repo-dto User 
+```
+
+## Important Note
+
+The name of the repository and DTO should match the name of the model. In this case, **User** refers to the **User** model. This consistency helps maintain organization within your codebase, making it easier to manage and understand the relationships between models, repositories, and DTOs.
+
+
+
 
 ### StatusFilter.php
 The `StatusFilter` class filters users by their status. This is an example of how filters are applied in the repository to ensure clean, reusable, and flexible querying.
@@ -319,35 +355,6 @@ To add a new filter to any repository:
 To extend the DTO to handle new data fields:
 1. **Modify the `UserData::fromRequest()` method** to include the new fields.
 2. **Ensure these fields are available** in the incoming request.
-
-## Creating Repository 
-
-To create a Repository and a Data Transfer Object (DTO), you can use the following Artisan command:
-
-```bash
-php artisan make:repo-dto User --action=repo
-```
-
-# Creating DTO
-
-To create a Repository and a Data Transfer Object (DTO), you can use the following Artisan command:
-
-```bash
-php artisan make:repo-dto User --action=dto
-```
-
-# To create them together ( DTO , Repository )
-
-```bash
-php artisan make:repo-dto User --action=all
-//or
-php artisan make:repo-dto User 
-```
-
-## Important Note
-
-The name of the repository and DTO should match the name of the model. In this case, **User** refers to the **User** model. This consistency helps maintain organization within your codebase, making it easier to manage and understand the relationships between models, repositories, and DTOs.
-
 
 
 
