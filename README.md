@@ -150,9 +150,9 @@ php artisan make:repo-dto User --action=repo
 in path **`App\Http\Repositories`**
 
 ```php
-namespace c;
+namespace App\Http\Repositories;
 
-use App\Filters\User\StatusFilter;
+use App\Filters\User\StatusUserFilter;
 use App\Http\DTOs\UserData;
 use App\Models\User;
 use RatebSa\Structure\Repositories\BaseRepo;
