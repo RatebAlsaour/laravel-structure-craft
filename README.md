@@ -147,7 +147,7 @@ php artisan make:repo-dto User --action=repo
 ```
 
 
-in path `App\Http\Repositories`
+in path **`App\Http\Repositories`**
 
 ```php
 namespace c;
@@ -251,7 +251,7 @@ To create a Repository and a Data Transfer Object (DTO), you can use the followi
 php artisan make:repo-dto User --action=dto
 ```
 
-
+in path  **`App\Http\DTOs`**
 
 ```php
 namespace App\Http\DTOs;
@@ -278,6 +278,12 @@ class UserData extends BaseDTO
 
 ### `fromRequest()`
 - **`fromRequest()`**: Gathers data from the incoming request (e.g., name, email, password, status) and creates an instance of `UserData`.
+
+## Extending the DTO
+To extend the DTO to handle new data fields:
+1. **Modify the `UserData::fromRequest()` method** to include the new fields.
+2. **Ensure these fields are available** in the incoming request.
+
 
 
 # To create them together ( DTO , Repository )
@@ -354,10 +360,6 @@ To add a new filter to any repository:
 2. **Define the filter logic** in the `apply()` method.
 3. **Add the filter** to the `filtersKeys` array in the repository.
 
-## Extending the DTO
-To extend the DTO to handle new data fields:
-1. **Modify the `UserData::fromRequest()` method** to include the new fields.
-2. **Ensure these fields are available** in the incoming request.
 
 
 
