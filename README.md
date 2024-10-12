@@ -189,7 +189,7 @@ class UserRepo extends BaseRepo
       // class UserRepo
       // Array with filterable fields
       protected $filtersKeys = [
-          'status'=>StatusFilter::class,
+          'status'=>StatusUserFilter::class,
       ];
 
 ```
