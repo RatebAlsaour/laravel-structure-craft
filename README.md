@@ -71,6 +71,8 @@ The package adheres to SOLID principles, particularly:
 - **Single Responsibility Principle (SRP)**: Each class has a well-defined role. Repositories handle data logic, controllers handle requests, and DTOs manage data transfer.
 - **Open-Closed Principle (OCP)**: The package is designed to be easily extendable without modifying existing code, enabling new filters and search criteria to be added seamlessly.
 
+## Usage
+
 # Project Structure
 
 
@@ -86,7 +88,7 @@ In your `routes/web.php` (or `routes/api.php` depending on your application stru
 
 
 
-## Usage
+
 
 ### UserController.php
 The `UserController` handles requests from the user and interacts with the `UserRepo` repository for retrieving or storing user data.
