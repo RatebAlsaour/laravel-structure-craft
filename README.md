@@ -147,9 +147,10 @@ php artisan make:repo-dto User --action=repo
 ```
 
 
+in path `App\Http\Repositories`
 
 ```php
-namespace App\Http\Repositories;
+namespace c;
 
 use App\Filters\User\StatusFilter;
 use App\Http\DTOs\UserData;
@@ -159,7 +160,7 @@ use RatebSa\Structure\Repositories\BaseRepo;
 class UserRepo extends BaseRepo
 {
     protected $filtersKeys = [
-        'status' => StatusFilter::class,
+        'status' => StatusUserFilter::class,
     ];
 
     protected $searchFileds = ['email'];
