@@ -86,6 +86,7 @@ In your `routes/web.php` (or `routes/api.php` depending on your application stru
 
 
 
+## Usage
 
 ### UserController.php
 The `UserController` handles requests from the user and interacts with the `UserRepo` repository for retrieving or storing user data.
@@ -129,11 +130,6 @@ class UserController extends Controller
 
 
 ```
-
-## Usage
-
-
-
 
 
 ### UserRepo.php
