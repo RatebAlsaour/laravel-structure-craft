@@ -1,17 +1,13 @@
 # laravel-structure-craft
-
-A brief description of your project, its purpose, and key features.
+- Package for Organizing Code with Design Patterns and SOLID Principles
+-This package is designed to help structure your code using the Repository and DTO (Data Transfer Object) patterns. It also implements SOLID principles to maintain clean, maintainable, and scalable business logic, especially for handling search and filter operations.
 
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contact](#contact)
 
-
-## Package for Organizing Code with Design Patterns and SOLID Principles
-
-This package is designed to help structure your code using the Repository and DTO (Data Transfer Object) patterns. It also implements SOLID principles to maintain clean, maintainable, and scalable business logic, especially for handling search and filter operations.
-
+## Getting started
 
 ### Installation
 To install the package, run the following command:
@@ -75,6 +71,8 @@ The package adheres to SOLID principles, particularly:
 - **Single Responsibility Principle (SRP)**: Each class has a well-defined role. Repositories handle data logic, controllers handle requests, and DTOs manage data transfer.
 - **Open-Closed Principle (OCP)**: The package is designed to be easily extendable without modifying existing code, enabling new filters and search criteria to be added seamlessly.
 
+## Usage
+
 # Project Structure
 
 
@@ -87,6 +85,7 @@ In your `routes/web.php` (or `routes/api.php` depending on your application stru
 - **`create`**: This route is set up to handle POST requests for creating a new user. It calls the `create` method in the `UserController`. This method is responsible for processing the incoming user data and storing it in the database.
 
 - **`index`**: This route handles POST requests to retrieve a filtered and searchable list of users. It calls the `index` method in the `UserController`. This method facilitates the retrieval of user data based on specified filters, ensuring efficient data management and response.
+
 
 
 
@@ -134,15 +133,26 @@ class UserController extends Controller
 
 ```
 
-## Key Concepts Continued
 
 ### UserRepo.php
 The `UserRepo` is responsible for handling all database interactions related to the User model. It extends the `BaseRepo` to benefit from common repository functionalities, such as filtering and searching.
 
+
+## Creating Repository 
+
+To create a Repository and a Data Transfer Object (DTO), you can use the following Artisan command:
+
+```bash
+php artisan make:repo-dto User --action=repo
+```
+
+
+in path **`App\Http\Repositories`**
+
 ```php
 namespace App\Http\Repositories;
 
-use App\Filters\User\StatusFilter;
+use App\Filters\User\StatusUserFilter;
 use App\Http\DTOs\UserData;
 use App\Models\User;
 use RatebSa\Structure\Repositories\BaseRepo;
@@ -150,7 +160,7 @@ use RatebSa\Structure\Repositories\BaseRepo;
 class UserRepo extends BaseRepo
 {
     protected $filtersKeys = [
-        'status' => StatusFilter::class,
+        'status' => StatusUserFilter::class,
     ];
 
     protected $searchFileds = ['email'];
@@ -168,6 +178,11 @@ class UserRepo extends BaseRepo
 }
 
 ```
+
+
+
+
+
 ### Filterable Fields
 - **Filterable fields (`filtersKeys`)**: Filters such as `StatusFilter` allow users to filter users by their status , Arrays to determine the filter that was created and will come later how to create it
 
@@ -175,7 +190,7 @@ class UserRepo extends BaseRepo
       // class UserRepo
       // Array with filterable fields
       protected $filtersKeys = [
-          'status'=>StatusFilter::class,
+          'status'=>StatusUserFilter::class,
       ];
 
 ```
@@ -223,17 +238,20 @@ class UserRepo extends BaseRepo
 
 
 
-
-
-
-
-
-
 ### UserData.php (DTO)
 The `UserData` class is responsible for collecting and validating data from requests before passing it to the repository.
 
 
 
+# Creating DTO
+
+To create a Repository and a Data Transfer Object (DTO), you can use the following Artisan command:
+
+```bash
+php artisan make:repo-dto User --action=dto
+```
+
+in path  **`App\Http\DTOs`**
 
 ```php
 namespace App\Http\DTOs;
@@ -261,7 +279,37 @@ class UserData extends BaseDTO
 ### `fromRequest()`
 - **`fromRequest()`**: Gathers data from the incoming request (e.g., name, email, password, status) and creates an instance of `UserData`.
 
-### StatusFilter.php
+## Extending the DTO
+To extend the DTO to handle new data fields:
+1. **Modify the `UserData::fromRequest()` method** to include the new fields.
+2. **Ensure these fields are available** in the incoming request.
+
+
+
+# To create them together ( DTO , Repository )
+
+```bash
+php artisan make:repo-dto User --action=all
+//or
+php artisan make:repo-dto User 
+```
+
+## Important Note
+
+The name of the repository and DTO should match the name of the model. In this case, **User** refers to the **User** model. This consistency helps maintain organization within your codebase, making it easier to manage and understand the relationships between models, repositories, and DTOs.
+
+### StatusUserFilter.php (DTO)
+
+## Creating a Filter
+
+To create a filter, you can use the following Artisan command:
+
+```bash
+php artisan make:filter User/StatusUserFilter
+```
+
+
+### StatusUserFilter.php
 The `StatusFilter` class filters users by their status. This is an example of how filters are applied in the repository to ensure clean, reusable, and flexible querying.
 
 ```php
@@ -269,7 +317,7 @@ namespace App\Filters\User;
 
 use RatebSa\Structure\Filters\Filter;
 
-class StatusFilter extends Filter
+class StatusUserFilter extends Filter
 {
     public static function rules(): array
     {
@@ -291,7 +339,7 @@ class StatusFilter extends Filter
 
 
 
-## Usage
+
 
 - **Create a User**: 
   Send a POST request to `/create` with user data (e.g., name, email, password, status).
@@ -299,13 +347,6 @@ class StatusFilter extends Filter
 - **List Users**: 
   Send a POST request to `/index` to retrieve a filtered and searchable list of users.
 
-## Creating a Filter
-
-To create a filter, you can use the following Artisan command:
-
-```bash
-php artisan make:filter StatusUserFilter
-```
 
 
 This command will generate a new filter class named StatusUserFilter. Filters are used to define the criteria for retrieving or manipulating data, allowing you to encapsulate and organize your query logic effectively.
@@ -318,39 +359,6 @@ To add a new filter to any repository:
 1. **Create a new filter class** (e.g., `AgeFilter`).
 2. **Define the filter logic** in the `apply()` method.
 3. **Add the filter** to the `filtersKeys` array in the repository.
-
-## Extending the DTO
-To extend the DTO to handle new data fields:
-1. **Modify the `UserData::fromRequest()` method** to include the new fields.
-2. **Ensure these fields are available** in the incoming request.
-3. 
-## Creating Repository 
-
-To create a Repository and a Data Transfer Object (DTO), you can use the following Artisan command:
-
-```bash
-php artisan make:repo-dto User --action=repo
-```
-
-# Creating DTO
-
-To create a Repository and a Data Transfer Object (DTO), you can use the following Artisan command:
-
-```bash
-php artisan make:repo-dto User --action=dto
-```
-
-# To create them together ( DTO , Repository )
-
-```bash
-php artisan make:repo-dto User --action=dto
-//or
-php artisan make:repo-dto User 
-```
-
-## Important Note
-
-The name of the repository and DTO should match the name of the model. In this case, **User** refers to the **User** model. This consistency helps maintain organization within your codebase, making it easier to manage and understand the relationships between models, repositories, and DTOs.
 
 
 
