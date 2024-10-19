@@ -12,7 +12,8 @@ use RatebSa\Structure\Console\Commands\MakeRepositoryAndDTO;
 class StructureServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services. v2.5
+     * Register any application services. v2.7
+     *
      * This method is for binding services, repositories, and other components into the service container.
      */
     public function register()
