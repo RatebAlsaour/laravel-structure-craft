@@ -24,6 +24,13 @@ use RepoTrait;
     // An Array containing fields that exist within searchable relationships
     protected $realationFileds = [];
 
+    // An Array containing fields that exist within searchable concatFiledRealation
+    protected $concatFiledRealation = [];
+
+
+        // An Array containing fields that exist within searchable concatFiled
+    protected $concatFiled = [];
+
 
 
 

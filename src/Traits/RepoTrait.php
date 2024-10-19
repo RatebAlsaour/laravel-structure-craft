@@ -2,9 +2,11 @@
 
 namespace RatebSa\Structure\Traits;
 
+use App\Http\DTOs\UserData;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 trait RepoTrait
@@ -161,19 +163,35 @@ trait RepoTrait
      */
     public function searchs($query)
     {
+        // Get the input value and treat empty or null values as null
         $input = request()->input('search-key');
+
+        // Check if the input is an empty string or an array of empty values
+        if (is_array($input) && empty(array_filter($input))) {
+            $input = null; // Treat empty array as null
+        } elseif (empty(trim($input))) {
+            $input = null; // Treat empty string as null
+        }
 
         // Create a nested query to handle both field and relation searches
         $query->where(function ($subQuery) use ($input) {
-            $subQuery->where(function ($subSubQuery) use ($input) {
-                $this->searchField($input, $subSubQuery); // Search specific fields
-            })->orWhere(function ($subSubQuery) use ($input) {
-                $this->searchRelation($input, $subSubQuery); // Search relations
-            });
+            // Only apply the search if the input is not null
+            if ($input !== null) {
+                $subQuery->where(function ($subSubQuery) use ($input) {
+                    $this->searchField($input, $subSubQuery);                      // Search specific fields
+                })->orWhere(function ($subSubQuery) use ($input) {
+                    $this->searchRelation($input, $subSubQuery);                   // Search relations
+                })->orWhere(function ($subSubQuery) use ($input) {
+                    $this->applyConcatenatedSearch($input, $subSubQuery);          // Search relations
+                })->orWhere(function ($subSubQuery) use ($input) {
+                    $this->applyConcatenatedRealationSearch($input, $subSubQuery); // Search relations
+                });
+            }
         });
 
         return $query;
     }
+
 
     /**
      * Calls the filter method if filters are present in the request.
@@ -236,9 +254,10 @@ trait RepoTrait
      */
     public function getData(Request|array $data)
     {
+
         return match(true) {
             $data instanceof Request => $this->objectDataClass::fromRequest($data), // Transform from Request
-            is_array($data)          => $this->objectDataClass::fromRequest($data), // Transform from array
+            is_array($data)          => $this->objectDataClass::formArray($data), // Transform from array
             default                  => throw new ErrorMsgException('Invalid data type') // Handle invalid data type
         };
     }
@@ -265,7 +284,7 @@ trait RepoTrait
      */
     public function update(Request|array $data, Model $model): Model
     {
-        $model->update($this->getData($data)->toArray()); // Update model with transformed data
+        $model->update($this->getData($data)->prepareDataForUpdate()); // Update model with transformed data
         return $model; // Return the updated model
     }
 
@@ -291,4 +310,36 @@ trait RepoTrait
     {
         return get_class($this->model); // Return the model's fully qualified class name
     }
+
+
+    protected function applyConcatenatedRealationSearch( $searchValue,$query)
+    {
+        foreach ($this->concatFiledRealation as $key => $value) {
+            $concatenatedField = 'CONCAT(' . implode(', " ", ', $value) . ')';
+            $query->whereHas($key, function ($sub) use ($concatenatedField, $value, $searchValue) {
+                $sub->selectRaw("$concatenatedField AS concatenated_field")
+                    ->whereNotNull(DB::raw('CONCAT(' . implode(', " ", ', array_map(function ($field) {
+                            return "IFNULL($field, '')";
+                        }, $value)) . ')'))
+                    ->whereRaw('CONCAT(' . implode(', " ", ', array_map(function ($field) {
+                            return "IFNULL($field, '')";
+                        }, $value)) . ') LIKE ?', ['%' . $searchValue . '%']);
+            });
+        }
+    }
+
+    protected function applyConcatenatedSearch($searchValue,$query)
+    {
+        foreach ($this->concatFiled as $key => $value) {
+            $concatenatedField = 'CONCAT(' . implode(', " ", ', $value) . ')';
+            $query->selectRaw("$concatenatedField AS concatenated_field")
+                ->whereNotNull(DB::raw('CONCAT(' . implode(', " ", ', array_map(function ($field) {
+                        return "IFNULL($field, '')";
+                    }, $value)) . ')'))
+                ->whereRaw('CONCAT(' . implode(', " ", ', array_map(function ($field) {
+                        return "IFNULL($field, '')";
+                    }, $value)) . ') LIKE ?', ['%' . $searchValue . '%']);
+        }
+    }
+
 }

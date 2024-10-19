@@ -7,6 +7,9 @@ use RatebSa\Structure\DTOs\BaseDTO;
 
 class {{ modelName }}Data extends BaseDTO
 {
+
+    public ?string $name ;
+
     public static function fromRequest(?Request $request, ...$params): static
     {
         $instance = parent::fromRequest($request, ...$params);
@@ -16,4 +19,15 @@ class {{ modelName }}Data extends BaseDTO
 
         return $instance;
     }
+
+
+      public static function formArray(?array $inputArray, ...$params): static
+        {
+            $instance = new static();
+
+            // Populate the instance with array data
+            $instance->name = $inputArray['name'] ?? null;   // Example
+
+            return $instance;
+        }
 }
